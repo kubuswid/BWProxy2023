@@ -8,7 +8,11 @@ public class VersionUtil {
         String[] parts = version.split("\\.");
         try {
             int major = Integer.parseInt(parts[0]);
-            int minor = Integer.parseInt(parts[1]);
+            String minorPart = parts[1];
+            if (minorPart.contains("-")) {
+                minorPart = minorPart.split("-")[0];
+            }
+            int minor = Integer.parseInt(minorPart);
             return major * 100 + minor; // e.g., 1.8 → 108, 1.13 → 113
         } catch (Exception e) {
             return 0; // fallback
